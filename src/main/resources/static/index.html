@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Enrollment</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-4">
+
+    <!-- Header -->
+    <h2 class="text-center mb-3">Course Enrollment</h2>
+
+    <!-- Alerts -->
+    <div id="successAlert" class="alert alert-success d-none"></div>
+    <div id="errorAlert" class="alert alert-danger d-none"></div>
+
+    <!-- Main Grid -->
+    <div class="row g-3">
+
+        <!-- ================= ADD STUDENT ================= -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="text-center">Add Student</h5>
+                    <hr>
+
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input id="studentName" class="form-control" placeholder="Enter name">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input id="studentEmail" type="email" class="form-control" placeholder="Enter email">
+                    </div>
+
+                    <div class="d-grid">
+                        <button class="btn btn-primary" onclick="addStudent()">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= ADD COURSE ================= -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="text-center">Add Course</h5>
+                    <hr>
+
+                    <div class="mb-3">
+                        <label class="form-label">Course Name</label>
+                        <input id="courseName" class="form-control" placeholder="Enter course name">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Capacity</label>
+                        <input id="courseCapacity" type="number" class="form-control" placeholder="Enter capacity">
+                    </div>
+
+                    <div class="d-grid">
+                        <button class="btn btn-success" onclick="addCourse()">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= ENROLL ================= -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="text-center">Enroll</h5>
+                    <hr>
+
+                    <h6>Available Courses</h6>
+                    <div class="table-responsive mb-3" style="max-height: 150px; overflow-y: auto;">
+                        <table class="table table-sm table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                </tr>
+                            </thead>
+                            <tbody id="courseTableBody">
+                                <!-- filled by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Student ID</label>
+                        <input id="enrollStudentId" type="number" class="form-control" placeholder="Enter student ID">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Course ID</label>
+                        <input id="enrollCourseId" type="number" class="form-control" placeholder="Click course above">
+                    </div>
+
+                    <div class="d-grid">
+                        <button class="btn btn-warning" onclick="enroll()">Enroll</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ================= JAVASCRIPT ================= -->
+<script>
+    // Load courses when page loads
+    window.onload = function () {
+        loadCourses();
+    };
+
+    function showSuccess(msg) {
+        let el = document.getElementById("successAlert");
+        el.innerText = msg;
+        el.classList.remove("d-none");
+        setTimeout(() => el.classList.add("d-none"), 3000);
+    }
+
+    function showError(msg) {
+        let el = document.getElementById("errorAlert");
+        el.innerText = msg;
+        el.classList.remove("d-none");
+        setTimeout(() => el.classList.add("d-none"), 3000);
+    }
+
+    // ---------- COURSES ----------
+    function loadCourses() {
+        fetch("/courses")
+            .then(res => res.json())
+            .then(courses => {
+                let table = document.getElementById("courseTableBody");
+                table.innerHTML = "";
+
+                courses.forEach(c => {
+                    table.innerHTML +=
+                        "<tr onclick='selectCourse(" + c.id + ")' style='cursor:pointer'>" +
+                        "<td>" + c.id + "</td>" +
+                        "<td>" + c.title + "</td>" +
+                        "</tr>";
+                });
+            })
+            .catch(() => showError("Failed to load courses"));
+    }
+
+    function addCourse() {
+        let course = {
+            title: document.getElementById("courseName").value,
+            capacity: document.getElementById("courseCapacity").value
+        };
+
+        fetch("/courses", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(course)
+        })
+        .then(response => {
+            if(!response.ok){
+                throw new Error("Failed to add course");
+            }
+        })
+        .then(() => {
+            showSuccess("Course added successfully");
+            loadCourses();
+            courseName.value = "";
+            courseCapacity.value = "";
+        })
+        .catch(err => {
+            showError(err.message)
+        })
+    }
+
+    function selectCourse(id) {
+        document.getElementById("enrollCourseId").value = id;
+    }
+
+    // ---------- STUDENT ----------
+    function addStudent() {
+        let student = {
+            name: studentName.value,
+            email: studentEmail.value
+        };
+
+        fetch("/students", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(student)
+        })
+        .then(response => {
+            if(!response.ok){
+                throw new Error("Failed to add student")
+            }
+        })
+        .then(() => {
+            showSuccess("Student added successfully");
+            studentName.value = "";
+            studentEmail.value = "";
+        })
+        .catch(err => showError(err.message));
+    }
+
+    // ---------- ENROLL ----------
+    function enroll() {
+        let enrollment = {
+            studentId: enrollStudentId.value,
+            courseId: enrollCourseId.value
+        };
+
+        fetch("/enrollments", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(enrollment)
+        })
+        .then(response => {
+            if(!response.ok){
+                throw new Error("Enrollment failed")
+            }
+        })
+        .then(() => showSuccess("Enrollment successful"))
+        .catch((err) => showError(err.message));
+    }
+</script>
+
+</body>
+</html>
