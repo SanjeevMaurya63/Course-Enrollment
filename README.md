@@ -15,15 +15,15 @@ https://course-enrollment-spring.onrender.com/
 
 ## 🚀 Features
 
-- Add and manage students  
-- Add and manage courses with capacity limits  
-- Enroll students into courses  
-- Prevent duplicate enrollments  
-- Handle course capacity constraints  
-- RESTful API design with proper HTTP status codes  
-- Global exception handling using `ProblemDetail`  
-- Lightweight admin UI (no frontend framework)  
-- Dockerized deployment  
+- Add and manage students
+- Add and manage courses with capacity limits
+- Enroll students into courses
+- Prevent duplicate enrollments
+- Handle course capacity constraints
+- RESTful API design with proper HTTP status codes
+- Global exception handling using `ProblemDetail`
+- Lightweight admin UI (no frontend framework)
+- Dockerized deployment
 - Deployed on **Render**
 
 ---
@@ -31,36 +31,41 @@ https://course-enrollment-spring.onrender.com/
 ## 🧱 Tech Stack
 
 ### Backend
-- Java 21  
-- Spring Boot  
-- Spring Web (REST)  
-- Spring Validation  
-- Spring Data JPA  
+
+- Java 21
+- Spring Boot
+- Spring Web (REST)
+- Spring Validation
+- Spring Data JPA
 - H2 Database (demo purpose)
 
 ### Frontend
-- HTML5  
-- Bootstrap 5  
+
+- HTML5
+- Bootstrap 5
 - Vanilla JavaScript (`fetch` API)
 
 ### DevOps
-- Docker (multi-stage build)  
+
+- Docker (multi-stage build)
 - Render (container-based deployment)
 
 ---
 
 ## 🏗️ Architecture Overview
+
 ```text
-Browser (HTML + JS)  
+Browser (HTML + JS)
 ↓
-REST Controllers (Spring Boot)  
+REST Controllers (Spring Boot)
 ↓
-Service Layer (Business Logic)  
+Service Layer (Business Logic)
 ↓
-Repository Layer (JPA)  
+Repository Layer (JPA)
 ↓
-Database (H2)  
+Database (H2)
 ```
+
 - UI communicates **only via REST APIs**
 - Business rules enforced in service layer
 - Errors mapped to HTTP responses using `@RestControllerAdvice`
@@ -72,12 +77,15 @@ Database (H2)
 > Screenshots taken from the deployed application UI.
 
 ### Home Page
+
 ![Home Page](screenshots/ui-1.png)
 
 ### Validation / Error Handling
+
 ![Validation Error](screenshots/ui-2.png)
 
 ### Swagger UI
+
 ![Swagger UI](screenshots/swagger-ui.png)
 
 ---
@@ -86,34 +94,34 @@ Database (H2)
 
 ### Students
 
-| Method | Endpoint | Description |
-|------|---------|------------|
-| POST | `/students` | Add new student |
+| Method | Endpoint    | Description     |
+| ------ | ----------- | --------------- |
+| POST   | `/students` | Add new student |
 
 ---
 
 ### Courses
 
-| Method | Endpoint | Description |
-|------|---------|------------|
-| GET | `/courses` | List all courses |
-| POST | `/courses` | Add new course |
+| Method | Endpoint   | Description      |
+| ------ | ---------- | ---------------- |
+| GET    | `/courses` | List all courses |
+| POST   | `/courses` | Add new course   |
 
 ---
 
 ### Enrollments
 
-| Method | Endpoint | Description |
-|------|---------|------------|
-| POST | `/enrollments` | Enroll student into course |
+| Method | Endpoint       | Description                |
+| ------ | -------------- | -------------------------- |
+| POST   | `/enrollments` | Enroll student into course |
 
 ---
 
 ## ⚠️ Error Handling
 
-- Validation errors → **400 Bad Request**  
-- Resource not found → **404 Not Found**  
-- Duplicate enrollment → **409 Conflict**  
+- Validation errors → **400 Bad Request**
+- Resource not found → **404 Not Found**
+- Duplicate enrollment → **409 Conflict**
 - Course capacity full → **409 Conflict**
 
 All error responses follow **RFC 7807 (`ProblemDetail`)** format.
@@ -122,5 +130,5 @@ All error responses follow **RFC 7807 (`ProblemDetail`)** format.
 
 ### 👤 Author
 
-Naveen G
+Sanjeev Maurya
 Aspiring Java Backend Developer
