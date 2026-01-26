@@ -1,4 +1,4 @@
-# Course Enrollment System
+# Student Course Enrollment System
 
 A Spring Boot–based backend application that manages **students, courses, and enrollments**, exposing RESTful APIs and a lightweight browser-based admin UI using **HTML, Bootstrap, and minimal JavaScript**.
 
