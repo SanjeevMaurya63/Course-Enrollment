@@ -1,8 +1,6 @@
 # Student Course Enrollment System
 
-A Spring Boot–based backend application that manages **students, courses, and enrollments**, exposing RESTful APIs and a lightweight browser-based admin UI using **HTML, Bootstrap, and minimal JavaScript**.
-
-This project demonstrates **backend-focused design**, clean REST architecture, validation, exception handling, and containerized deployment using **Docker**.
+A Spring Boot–based backend application designed to efficiently manage students, courses, and enrollments through well-structured RESTful APIs. The system includes a lightweight browser-based admin interface built with HTML, Bootstrap, and minimal JavaScript for easy interaction. It demonstrates clean backend architecture, robust validation, global exception handling, and containerized deployment using Docker, ensuring scalability and maintainability.
 
 ---
 
