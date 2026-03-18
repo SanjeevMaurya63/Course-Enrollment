@@ -13,16 +13,7 @@ https://course-enrollment-spring.onrender.com/
 
 ## 🚀 Features
 
-- Add and manage students
-- Add and manage courses with capacity limits
-- Enroll students into courses
-- Prevent duplicate enrollments
-- Handle course capacity constraints
-- RESTful API design with proper HTTP status codes
-- Global exception handling using `ProblemDetail`
-- Lightweight admin UI (no frontend framework)
-- Dockerized deployment
-- Deployed on **Render**
+
 
 ---
 
