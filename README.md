@@ -6,8 +6,7 @@ A Spring Boot–based backend application that manages **students, courses, and 
 
 ## 🌐 Live Deployment URL
 
-**Base URL:**  
-https://course-enrollment-spring.onrender.com/
+
 
 ---
 
