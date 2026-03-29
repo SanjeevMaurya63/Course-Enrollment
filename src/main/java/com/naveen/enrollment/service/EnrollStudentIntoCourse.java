@@ -2,15 +2,7 @@ package com.naveen.enrollment.service;
 
 import org.springframework.stereotype.Service;
 
-import com.naveen.enrollment.entity.Course;
-import com.naveen.enrollment.entity.Enrollment;
-import com.naveen.enrollment.entity.Student;
-import com.naveen.enrollment.exception.CourseNotFoundException;
-import com.naveen.enrollment.exception.DuplicateEnrollmentException;
-import com.naveen.enrollment.exception.StudentNotFoundException;
-import com.naveen.enrollment.repository.CourseRepository;
-import com.naveen.enrollment.repository.EnrollmentRepository;
-import com.naveen.enrollment.repository.StudentRepository;
+
 
 import jakarta.transaction.Transactional;
 
