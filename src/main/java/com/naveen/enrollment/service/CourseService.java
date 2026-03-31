@@ -19,9 +19,7 @@ public class CourseService {
         this.repo = repo;
     }
 
-    public void createCourse(CourseRequest request){
-        Course newCourse = new Course(request.getTitle(), request.getCapacity());
-        repo.save(newCourse);
+    
     }
 
     public List<CourseSummaryResponse> listCourses(){
