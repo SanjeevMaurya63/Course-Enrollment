@@ -25,7 +25,11 @@ public class GlobalExceptionHandler {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
             .body(ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage()));
         }
-
+   @ExceptionHandler({DuplicateEnrollmentException.class, CourseCapacityFullException.class})
+        ResponseEntity<ProblemDetail> handleConflict(RuntimeException ex){
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+            .body(ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, ex.getMessage()));
+        }
      
 
         @ExceptionHandler(MethodArgumentNotValidException.class)
