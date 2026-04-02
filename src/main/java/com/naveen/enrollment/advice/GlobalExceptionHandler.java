@@ -49,7 +49,11 @@ public class GlobalExceptionHandler {
             .body(problemDetail);
         }
 
-       
+        @ExceptionHandler(DataIntegrityViolationException.class)
+        ResponseEntity<ProblemDetail> handleDbConstraints(DataIntegrityViolationException ex){
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+            .body(ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, "Duplicate or conflicting data"));
+        }
 
         @ExceptionHandler(SQLException.class)
         ResponseEntity<ProblemDetail> handleSqlError(SQLException ex){
