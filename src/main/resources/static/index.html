@@ -169,12 +169,7 @@
                 throw new Error("Failed to add course");
             }
         })
-        .then(() => {
-            showSuccess("Course added successfully");
-            loadCourses();
-            courseName.value = "";
-            courseCapacity.value = "";
-        })
+
         .catch(err => {
             showError(err.message)
         })
