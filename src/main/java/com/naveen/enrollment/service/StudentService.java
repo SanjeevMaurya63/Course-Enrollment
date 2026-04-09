@@ -19,10 +19,7 @@ public class StudentService {
         this.repo = repo;
     }
 
-    public void createStudent(StudentRequest request){
-        Student newStudent = new Student(request.getName(), request.getEmail());
-        repo.save(newStudent);
-    }
+
 
     public List<StudentSummaryResponse> listStudents(){
         List<StudentSummaryResponse> students = repo.findAll()
